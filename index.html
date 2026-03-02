@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Workout Tracker</h1>
+      <p class="tagline">Log sets and reps for your gym workouts</p>
+    </header>
+
+    <main class="app-views">
+      <div id="view-workouts" class="app-view app-view--active">
+        <section class="log-form">
+          <h2>Log a workout</h2>
+          <form id="workout-form">
+            <div class="field date-picker-field">
+              <label>Date</label>
+              <input type="hidden" id="date">
+              <button type="button" id="date-picker-trigger" class="date-picker-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Choose date">Select date</button>
+              <div id="date-picker-list" class="date-picker-list date-picker-list--closed" role="listbox" aria-label="Choose date"></div>
+            </div>
+
+            <div class="add-exercise-section">
+              <button type="button" id="add-new-exercise-toggle" class="secondary-btn">+ Add new exercise</button>
+              <div id="add-new-exercise-form" class="add-new-exercise-form add-new-exercise-form--closed">
+                <div class="field">
+                  <label for="new-exercise-name">Exercise name</label>
+                  <input type="text" id="new-exercise-name" placeholder="e.g. Cable Crossover">
+                </div>
+                <div class="field">
+                  <label for="new-exercise-body-part">Body part</label>
+                  <select id="new-exercise-body-part">
+                    <option value="chest">Chest</option>
+                    <option value="legs">Legs</option>
+                    <option value="back">Back</option>
+                    <option value="shoulders">Shoulders</option>
+                    <option value="arms">Arms</option>
+                    <option value="core">Core</option>
+                  </select>
+                </div>
+                <button type="button" id="add-new-exercise-save" class="secondary-btn">Save exercise</button>
+              </div>
+            </div>
+
+            <div id="exercises-container"></div>
+
+            <p id="workout-form-message" class="form-message hidden" aria-live="polite"></p>
+            <div class="form-actions">
+              <button type="button" id="add-exercise-btn" class="secondary-btn">+ Add exercise</button>
+              <button type="submit">Save workout</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <div id="view-edit-exercise" class="app-view">
+        <section class="edit-exercise-section">
+          <button type="button" id="edit-exercise-back-btn" class="back-to-workout-btn">← Back to workout</button>
+          <div id="edit-exercise-content" class="edit-exercise-content"></div>
+        </section>
+      </div>
+
+      <div id="view-calendar" class="app-view">
+        <section class="calendar-section">
+          <h2>Calendar</h2>
+          <div class="calendar-nav">
+            <button type="button" id="calendar-prev" class="calendar-nav-btn" aria-label="Previous month">‹</button>
+            <span id="calendar-month-label" class="calendar-month-label"></span>
+            <button type="button" id="calendar-next" class="calendar-nav-btn" aria-label="Next month">›</button>
+          </div>
+          <div id="calendar-grid" class="calendar-grid"></div>
+          <div class="calendar-legend">
+            <span class="legend-item" style="--dot: #5b8ddb">Chest</span>
+            <span class="legend-item" style="--dot: #d65c5c">Legs</span>
+            <span class="legend-item" style="--dot: #6bb56b">Back</span>
+            <span class="legend-item" style="--dot: #d4a84b">Shoulders</span>
+            <span class="legend-item" style="--dot: #9b7dd4">Arms</span>
+            <span class="legend-item" style="--dot: #d4824a">Core</span>
+          </div>
+          <div id="calendar-day-preview" class="calendar-day-preview" hidden>
+            <p id="calendar-day-preview-label" class="calendar-day-preview-label"></p>
+            <div id="calendar-day-preview-content" class="calendar-day-preview-content"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Switch view">
+      <button type="button" class="nav-tile nav-tile--active" data-view="workouts" id="nav-tile-workouts">
+        Today's workouts
+      </button>
+      <button type="button" class="nav-tile" data-view="calendar" id="nav-tile-calendar">
+        Calendar
+      </button>
+    </nav>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
